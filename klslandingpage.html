@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>KLS STUDIO ONLINE | Build. Simulate. Learn. Innovate.</title>
+<!-- Google Fonts: Outfit, Inter & JetBrains Mono -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Outfit:wght@400;500;600;700;800;900&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration -->
+<script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Outfit', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            kls: {
+              blue: '#1b3f94',
+              cyan: '#00F0FF',
+              dark: '#070b14',
+              card: 'rgba(15, 23, 42, 0.75)',
+              lightCard: 'rgba(255, 255, 255, 0.95)'
+            }
+          }
+        }
+      }
+    }
+  </script>
+<!-- Core Theme & Visual Effects Styles -->
+<style data-purpose="theme-and-visuals">
+    /* Custom Scrollbars */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(10, 15, 30, 0.5);
+    }
+    html.light-mode ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1e3a8a;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #00F0FF;
+    }
+    html.light-mode ::-webkit-scrollbar-thumb {
+      background: #94a3b8;
+    }
+    html.light-mode ::-webkit-scrollbar-thumb:hover {
+      background: #0284c7;
+    }
+
+    /* Gradient Text Effects */
+    .hero-gradient-row-1 {
+      background: linear-gradient(135deg, #00F0FF 0%, #38BDF8 30%, #2563EB 70%, #1e40af 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-gradient-row-2 {
+      background: linear-gradient(135deg, #10B981 0%, #00F0FF 45%, #F59E0B 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Light Mode high-contrast gradient adjust */
+    html.light-mode .hero-gradient-row-1 {
+      background: linear-gradient(135deg, #0284c7 0%, #1d4ed8 50%, #0f172a 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    html.light-mode .hero-gradient-row-2 {
+      background: linear-gradient(135deg, #059669 0%, #0284c7 50%, #d97706 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Glowing cyber energy grid & traces animation */
+    @keyframes cyber-glow {
+      0%, 100% {
+        opacity: 0.85;
+        filter: drop-shadow(0 0 18px rgba(0, 240, 255, 0.65));
+      }
+      50% {
+        opacity: 1;
+        filter: drop-shadow(0 0 35px rgba(0, 240, 255, 0.95)) drop-shadow(0 0 50px rgba(37, 99, 235, 0.85));
+      }
+    }
+    .cyber-trace-glow {
+      animation: cyber-glow 3.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse-energy-field {
+      0%, 100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 0.45;
+      }
+      50% {
+        transform: scale(1.08) rotate(3deg);
+        opacity: 0.75;
+      }
+    }
+    .energy-field-1 {
+      animation: pulse-energy-field 8s ease-in-out infinite alternate;
+    }
+    .energy-field-2 {
+      animation: pulse-energy-field 11s ease-in-out infinite alternate-reverse;
+    }
+
+    /* Subtle pulse grid animation */
+    @keyframes grid-flow {
+      0% { background-position: 0 0; }
+      100% { background-position: 50px 50px; }
+    }
+    .cyber-grid-overlay {
+      background-image: 
+        linear-gradient(to right, rgba(0, 240, 255, 0.12) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0, 240, 255, 0.12) 1px, transparent 1px);
+      background-size: 50px 50px;
+      animation: grid-flow 20s linear infinite;
+    }
+    html.light-mode .cyber-grid-overlay {
+      background-image: 
+        linear-gradient(to right, rgba(2, 132, 199, 0.12) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(2, 132, 199, 0.12) 1px, transparent 1px);
+      background-size: 50px 50px;
+    }
+
+    /* Glass Backdrop Filters */
+    .glass-panel {
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    /* Sparkline & Wave animations in HUD Metric Cards */
+    @keyframes live-wave {
+      0% { stroke-dashoffset: 0; }
+      100% { stroke-dashoffset: -100; }
+    }
+    .live-wave-path {
+      stroke-dasharray: 8, 4;
+      animation: live-wave 4s linear infinite;
+    }
+
+    /* Dedicated Permanent Zero-Background Header Rule in ALL modes */
+    #mainHeader, header[data-purpose="page-header"] {
+      background: transparent !important;
+      background-color: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+    }
+
+    /* ==========================================================
+       DAY / LIGHT MODE COMPREHENSIVE REINFORCEMENTS
+       ========================================================== */
+    html.light-mode body {
+      background-color: #f8fafc !important;
+      color: #0f172a !important;
+    }
+
+    html.light-mode #heroBgImage {
+      opacity: 0.18 !important;
+      filter: grayscale(30%) contrast(110%) brightness(105%) !important;
+    }
+
+    html.light-mode #ambientGradOverlay {
+      background: linear-gradient(to bottom, rgba(248, 250, 252, 0.85) 0%, rgba(241, 245, 249, 0.95) 50%, #f8fafc 100%) !important;
+    }
+
+    html.light-mode #liveStatusBadge {
+      background-color: #ffffff !important;
+      border-color: #cbd5e1 !important;
+      color: #0369a1 !important;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06) !important;
+    }
+
+    html.light-mode #heroTechBadge {
+      background-color: #ffffff !important;
+      border-color: #93c5fd !important;
+      color: #1d4ed8 !important;
+      box-shadow: 0 4px 12px rgba(37,99,235,0.08) !important;
+    }
+
+    html.light-mode #heroSubtitle {
+      color: #334155 !important;
+      text-shadow: none !important;
+    }
+
+    /* Theme Toggle Button in Light Mode */
+    html.light-mode #themeToggleBtn {
+      background-color: #ffffff !important;
+      border: 2px solid #0f172a !important;
+      color: #0f172a !important;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15) !important;
+    }
+    html.light-mode #themeToggleBtn:hover {
+      background-color: #f1f5f9 !important;
+      border-color: #0284c7 !important;
+      color: #0284c7 !important;
+    }
+
+    /* Buttons in Light Mode */
+    html.light-mode #explorePlatformHeroBtn {
+      background-color: #ffffff !important;
+      border-color: #cbd5e1 !important;
+      color: #0284c7 !important;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.06) !important;
+    }
+    html.light-mode #explorePlatformHeroBtn:hover {
+      border-color: #0284c7 !important;
+      background-color: #f0f9ff !important;
+    }
+
+    html.light-mode #demoHeroBtn {
+      background-color: #ffffff !important;
+      border-color: #cbd5e1 !important;
+      color: #0f172a !important;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.06) !important;
+    }
+    html.light-mode #demoHeroBtn:hover {
+      border-color: #64748b !important;
+      background-color: #f8fafc !important;
+    }
+
+    /* Metric HUD Cards in Light Mode */
+    html.light-mode .metric-card {
+      background-color: #ffffff !important;
+      border-color: #e2e8f0 !important;
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.05) !important;
+    }
+    html.light-mode .metric-title {
+      color: #0f172a !important;
+    }
+    html.light-mode .metric-desc {
+      color: #64748b !important;
+    }
+
+    /* Section styling in Light Mode */
+    html.light-mode #platformOverviewSection {
+      background-color: #f1f5f9 !important;
+      border-top-color: #e2e8f0 !important;
+    }
+    html.light-mode #sectionHeading {
+      color: #0f172a !important;
+    }
+    html.light-mode #sectionSubhead {
+      color: #475569 !important;
+    }
+    html.light-mode #sectionPill {
+      background-color: #e0f2fe !important;
+      border-color: #bae6fd !important;
+      color: #0284c7 !important;
+    }
+
+    /* Project Cards in Light Mode */
+    html.light-mode .project-card {
+      background-color: #ffffff !important;
+      border-color: #e2e8f0 !important;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.04) !important;
+    }
+    html.light-mode .card-heading {
+      color: #0f172a !important;
+    }
+    html.light-mode .card-desc {
+      color: #475569 !important;
+    }
+    html.light-mode .code-box-preview {
+      background-color: #f8fafc !important;
+      border-color: #e2e8f0 !important;
+      color: #0369a1 !important;
+    }
+    html.light-mode .card-action-btn-circuit {
+      background-color: #f0f9ff !important;
+      border-color: #bae6fd !important;
+      color: #0284c7 !important;
+    }
+    html.light-mode .card-action-btn-circuit:hover {
+      background-color: #e0f2fe !important;
+    }
+
+    /* Footer styling in Light Mode */
+    html.light-mode #mainFooter {
+      background-color: #ffffff !important;
+      border-top-color: #e2e8f0 !important;
+      color: #475569 !important;
+    }
+    html.light-mode #footerBrandTitle {
+      color: #0f172a !important;
+    }
+    html.light-mode #footerAddressText {
+      color: #475569 !important;
+    }
+    html.light-mode .footer-col-title {
+      color: #0f172a !important;
+    }
+    html.light-mode .footer-link {
+      color: #64748b !important;
+    }
+    html.light-mode .footer-link:hover {
+      color: #0284c7 !important;
+    }
+    html.light-mode #footerBottomBar {
+      border-top-color: #e2e8f0 !important;
+      color: #64748b !important;
+    }
+
+    /* Modals in Light Mode */
+    html.light-mode #loginModal > div,
+    html.light-mode #exploreModal > div,
+    html.light-mode #deepDiveModal > div,
+    html.light-mode #demoModal > div {
+      background-color: #ffffff !important;
+      border-color: #cbd5e1 !important;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important;
+      color: #0f172a !important;
+    }
+    html.light-mode .modal-heading {
+      color: #0f172a !important;
+    }
+    html.light-mode .modal-subtext {
+      color: #475569 !important;
+    }
+    html.light-mode .studio-card {
+      background-color: #f8fafc !important;
+      border-color: #e2e8f0 !important;
+    }
+    html.light-mode .studio-card:hover {
+      background-color: #ffffff !important;
+      border-color: #0284c7 !important;
+    }
+    html.light-mode .studio-card h3 {
+      color: #0f172a !important;
+    }
+  </style>
+</head>
+<body class="bg-[#070b14] text-slate-100 font-sans transition-colors duration-300 min-h-screen relative overflow-x-hidden selection:bg-cyan-500 selection:text-slate-900" id="bodyRoot">
+<!-- BEGIN: BackgroundLayer (Prominent Robotic Laboratory & Vivid Cyber Energy Grid) -->
+<div class="fixed inset-0 pointer-events-none z-0 overflow-hidden" data-purpose="ambient-background">
+<!-- Glowing Ambient Radial Energy Fields -->
+<div class="absolute -top-[15%] left-1/2 -translate-x-1/2 w-[1000px] h-[850px] bg-gradient-to-br from-cyan-400/30 via-blue-600/25 to-transparent rounded-full blur-[110px] energy-field-1 pointer-events-none"></div>
+<div class="absolute top-[40%] -left-[10%] w-[750px] h-[750px] bg-gradient-to-tr from-emerald-500/20 via-cyan-600/25 to-transparent rounded-full blur-[100px] energy-field-2 pointer-events-none"></div>
+<div class="absolute top-[60%] -right-[5%] w-[700px] h-[700px] bg-gradient-to-tl from-blue-700/30 via-indigo-500/20 to-transparent rounded-full blur-[110px] energy-field-1 pointer-events-none"></div>
+<!-- Highly Prominent, Vivid Futuristic Robotic Arm Laboratory Image -->
+<img alt="KLS Studio Cyber-Physical Laboratory Robot" class="w-full h-full object-cover object-center opacity-70 transition-all duration-500 filter brightness-110 contrast-125 scale-100 transform" id="heroBgImage" src="https://lh3.googleusercontent.com/aida/AEtjO1WP_9H7Gbsykhg4wbNbpvCDYYWq61UbBHCZ1afKz_NqtCWM1jy1gO9cwSXdK_-l3oXYlhTRWb73shGzSMjmc9iD-RqMcixYKOdL8mYmVi_QdVlV7ZkLXODDQYNW0Gu8WcWDGzkbfnZqPzLS9ZDy1eTjJ9oPEDa7se9g8wGtuaCxRpiBO-uUuXiIGy_pLgAWeW_IpUJXRyso6EbRzdNn1qqVFqo13SeUNXfdGRhj_n3htmLnBqQJXV_HsSE"/>
+<!-- Dynamic Cyber Grid Overlay for Rich Spatial Depth -->
+<div class="absolute inset-0 cyber-grid-overlay opacity-30"></div>
+<!-- Dynamic Gradient Wash -->
+<div class="absolute inset-0 bg-gradient-to-b from-[#070b14]/55 via-[#070b14]/75 to-[#070b14]/95 transition-all duration-300" id="ambientGradOverlay"></div>
+<!-- High-Contrast Interactive Cyber Particle Canvas Overlay -->
+<canvas class="absolute inset-0 w-full h-full opacity-85 cyber-trace-glow" height="2844" id="particleCanvas" width="2204"></canvas>
+</div>
+<!-- END: BackgroundLayer -->
+<div class="relative z-10 flex flex-col min-h-screen">
+<!-- BEGIN: TopNavigation (Strictly 100% Transparent Bar in Both Light & Dark Modes) -->
+<header class="w-full sticky top-0 z-40 bg-transparent border-none shadow-none transition-none" data-purpose="page-header" id="mainHeader" style="background: transparent !important; background-color: transparent !important; border: none !important; box-shadow: none !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important;">
+<div class="w-full px-6 lg:px-16 h-20 flex items-center justify-between bg-transparent">
+<div class="flex items-center space-x-4 bg-transparent">
+<a class="flex items-center group bg-transparent" href="#" title="KLS Studio - Home">
+<img alt="KLS Studio Logo" class="h-11 sm:h-12 w-auto object-contain filter drop-shadow-[0_0_14px_rgba(37,99,235,0.45)] group-hover:scale-105 transition-transform duration-200" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmXrKvDGbDT5VUBX-joGMSL8AW90ddPaHgm_q0BVEd-aq_jmPPcoKHxu8eXuSCHy-HxNpt2064b_KyIHA8CfSa7i7pb17JJdmfPnnLiDH3P46IJ-nQYXNygYypKZxPw69kFeeMzc7X3CgX0Z7PkGQd2I-Pd-YWav4srerVnSDgi7o6m_-DYBVeP4h7gGNJVqmEDtJZR2emOyJtvnSI4qpwIV6nzEAhtwrVapUBmOt1NRhwxeRYeW5wcl2PwNxFfdMM6A"/>
+</a>
+<div class="hidden sm:flex items-center space-x-2 px-3.5 py-1.5 rounded-full border border-cyan-500/50 bg-cyan-950/60 text-cyan-300 text-xs font-semibold tracking-wider font-mono shadow-[0_0_18px_rgba(0,240,255,0.25)] backdrop-blur-sm transition-all" id="liveStatusBadge">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
+</span>
+<span>KLS STUDIO ONLINE</span>
+</div>
+</div>
+<div class="flex items-center space-x-4 sm:space-x-5 bg-transparent">
+<!-- Day / Light Mode Toggle Button with explicit theme-toggle-btn ID and reliable handler -->
+<button aria-label="Toggle visual theme between Light and Dark mode" class="relative p-2.5 rounded-xl border border-slate-700/80 bg-slate-900/90 text-slate-100 hover:text-cyan-400 hover:border-cyan-400 hover:bg-slate-800 transition-all duration-200 shadow-md backdrop-blur-md cursor-pointer flex items-center justify-center" id="theme-toggle-btn" title="Toggle Day / Night Theme" type="button">
+<!-- Moon Icon (shown in day/light mode) -->
+<svg class="w-5 h-5 hidden text-slate-900" fill="none" id="moonIcon" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"></path>
+</svg>
+<!-- Sun Icon (shown in dark mode) -->
+<svg class="w-5 h-5 text-amber-400" fill="none" id="sunIcon" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M12 3v1m0 16v1m9-9h-1M4 9h-1m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"></path>
+</svg>
+</button>
+<!-- Launch KLS Button -->
+<button class="relative group p-[1.5px] rounded-xl font-display font-semibold text-sm tracking-wide text-white overflow-hidden shadow-[0_0_24px_rgba(0,240,255,0.4)] hover:shadow-[0_0_36px_rgba(0,240,255,0.7)] transition-all duration-300 active:scale-95" onclick="openLoginModal()" type="button">
+<span class="absolute inset-0 bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-600 rounded-xl transition-all duration-300 group-hover:opacity-100 animate-pulse"></span>
+<div class="relative px-5 py-2.5 rounded-[10px] bg-slate-950/90 group-hover:bg-gradient-to-r group-hover:from-blue-600/90 group-hover:to-cyan-600/90 transition-all duration-300 flex items-center space-x-2.5">
+<span class="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_8px_#00F0FF] animate-ping"></span>
+<span class="tracking-wider uppercase font-bold text-xs sm:text-sm text-cyan-200 group-hover:text-white">LAUNCH KLS →</span>
+</div>
+</button>
+</div>
+</div>
+</header>
+<!-- END: TopNavigation -->
+<!-- BEGIN: MainHeroSection -->
+<main class="flex flex-col justify-center items-center text-center px-4 sm:px-6 lg:px-8 pt-16 sm:pt-24 pb-16">
+<div class="mx-auto flex flex-col items-center max-w-7xl">
+<!-- Live Technology Badge -->
+<div class="inline-flex items-center space-x-2.5 px-4 py-1.5 rounded-full border border-blue-500/40 bg-blue-950/40 text-blue-300 text-xs sm:text-sm font-medium mb-8 backdrop-blur-md shadow-[0_0_20px_rgba(37,99,235,0.25)] transition-all" id="heroTechBadge">
+<span class="w-2.5 h-2.5 rounded-full bg-cyan-400 shadow-[0_0_10px_#00F0FF] animate-pulse"></span>
+<span class="tracking-wide">Next-Generation Cyber Virtual Labs</span>
+</div>
+<!-- Big Highlighted Two-Row Headline -->
+<h1 class="font-display font-black tracking-tight leading-none text-4xl sm:text-6xl md:text-7xl lg:text-8xl select-none mb-6">
+<span class="block hero-gradient-row-1 drop-shadow-sm">BUILD. SIMULATE.</span>
+<span class="block hero-gradient-row-2 mt-2 drop-shadow-sm">LEARN. INNOVATE.</span>
+</h1>
+<!-- Subtitle -->
+<p class="max-w-3xl text-base sm:text-lg md:text-xl text-slate-200 font-normal leading-relaxed mb-10 text-balance drop-shadow-md transition-colors" id="heroSubtitle">
+  Design code, simulate and experiment with the real engineering components directly in your browser, no hardware burnouts, Zero component shortages and instant verification.
+</p>
+<!-- Hero Action Buttons -->
+<div class="w-full flex flex-wrap items-center justify-center gap-4 sm:gap-6 mt-2">
+<!-- Button 1: LAUNCH VIRTUAL LAB -->
+<button class="group relative inline-flex items-center space-x-3 px-6 py-4 rounded-xl font-display font-bold text-sm sm:text-base text-white bg-gradient-to-r from-blue-700 via-indigo-600 to-cyan-600 hover:from-blue-600 hover:to-cyan-500 shadow-[0_0_25px_rgba(0,240,255,0.35)] hover:shadow-[0_0_40px_rgba(0,240,255,0.65)] transform hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200" onclick="openLoginModal()">
+<svg class="w-5 h-5 text-cyan-200 group-hover:rotate-12 transition-transform duration-300" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span class="tracking-wide">LAUNCH VIRTUAL LAB →</span>
+</button>
+<!-- Button 2: EXPLORE PLATFORM -->
+<button class="group inline-flex items-center space-x-3 px-6 py-4 rounded-xl font-display font-semibold text-sm sm:text-base text-cyan-300 bg-slate-900/80 hover:bg-slate-800/90 border border-cyan-500/40 hover:border-cyan-400 shadow-[0_0_20px_rgba(37,99,235,0.2)] hover:shadow-[0_0_30px_rgba(0,240,255,0.4)] transform hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 backdrop-blur-md" id="explorePlatformHeroBtn" onclick="openExploreModal()">
+<svg class="w-5 h-5 text-cyan-400 group-hover:scale-110 transition-transform duration-200" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span class="tracking-wide">EXPLORE PLATFORM</span>
+</button>
+<!-- Button 3: INTERACTIVE DEMO -->
+<button class="group inline-flex items-center space-x-3 px-6 py-4 rounded-xl font-display font-semibold text-sm sm:text-base text-slate-200 bg-slate-900/70 hover:bg-slate-800/80 border border-slate-700 hover:border-slate-500 shadow-lg transform hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 backdrop-blur-md" id="demoHeroBtn" onclick="openModal('demoModal')">
+<svg class="w-5 h-5 text-amber-400 group-hover:animate-pulse" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span class="tracking-wide">INTERACTIVE DEMO</span>
+</button>
+</div>
+<!-- Quick Metrics Ribbon: 4 Interactive HUD Cards -->
+<div class="mt-14 pt-8 border-t border-slate-800/80 w-full grid grid-cols-2 md:grid-cols-4 gap-4 text-left max-w-5xl" id="metricsRibbon">
+<!-- Card 1: 0ms Latency -->
+<div class="relative group p-4 rounded-xl bg-slate-950/80 border border-slate-800/90 hover:border-cyan-400 transition-all duration-300 backdrop-blur-md shadow-lg hover:shadow-[0_0_24px_rgba(0,240,255,0.35)] overflow-hidden cursor-pointer metric-card" onclick="pulseMetricCard(this)">
+<div class="absolute -right-6 -bottom-6 w-16 h-16 bg-cyan-500/10 rounded-full blur-xl group-hover:bg-cyan-500/25 transition-all"></div>
+<div class="flex items-center justify-between mb-1">
+<div class="text-[11px] font-mono text-cyan-400 font-semibold tracking-wider flex items-center space-x-1.5">
+<span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+<span>0ms LATENCY</span>
+</div>
+<svg class="w-12 h-4 text-cyan-400 opacity-70 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 50 16">
+<path class="live-wave-path" d="M0 8 Q 12 0, 25 8 T 50 8"></path>
+</svg>
+</div>
+<div class="text-xl font-bold font-display text-white mt-1 group-hover:text-cyan-200 transition-colors metric-title">Real-Time SPICE</div>
+<div class="text-[11px] text-slate-400 mt-0.5 metric-desc">WebAssembly nodal solver</div>
+</div>
+<!-- Card 2: 500+ Components -->
+<div class="relative group p-4 rounded-xl bg-slate-950/80 border border-slate-800/90 hover:border-emerald-400 transition-all duration-300 backdrop-blur-md shadow-lg hover:shadow-[0_0_24px_rgba(16,185,129,0.35)] overflow-hidden cursor-pointer metric-card" onclick="pulseMetricCard(this)">
+<div class="absolute -right-6 -bottom-6 w-16 h-16 bg-emerald-500/10 rounded-full blur-xl group-hover:bg-emerald-500/25 transition-all"></div>
+<div class="flex items-center justify-between mb-1">
+<div class="text-[11px] font-mono text-emerald-400 font-semibold tracking-wider flex items-center space-x-1.5">
+<span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+<span>500+ COMPONENTS</span>
+</div>
+<div class="flex space-x-1">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+</div>
+</div>
+<div class="text-xl font-bold font-display text-white mt-1 group-hover:text-emerald-200 transition-colors metric-title">Physics Accurate</div>
+<div class="text-[11px] text-slate-400 mt-0.5 metric-desc">Actuators, MCUs &amp; Diodes</div>
+</div>
+<!-- Card 3: Zero Hardware Risk -->
+<div class="relative group p-4 rounded-xl bg-slate-950/80 border border-slate-800/90 hover:border-amber-400 transition-all duration-300 backdrop-blur-md shadow-lg hover:shadow-[0_0_24px_rgba(245,158,11,0.35)] overflow-hidden cursor-pointer metric-card" onclick="pulseMetricCard(this)">
+<div class="absolute -right-6 -bottom-6 w-16 h-16 bg-amber-500/10 rounded-full blur-xl group-hover:bg-amber-500/25 transition-all"></div>
+<div class="flex items-center justify-between mb-1">
+<div class="text-[11px] font-mono text-amber-400 font-semibold tracking-wider flex items-center space-x-1.5">
+<span class="w-2 h-2 rounded-full bg-amber-400"></span>
+<span>ZERO HARDWARE RISK</span>
+</div>
+<svg class="w-4 h-4 text-amber-400 group-hover:rotate-45 transition-transform" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<div class="text-xl font-bold font-display text-white mt-1 group-hover:text-amber-200 transition-colors metric-title">Protected Sandbox</div>
+<div class="text-[11px] text-slate-400 mt-0.5 metric-desc">No blown capacitors or ICs</div>
+</div>
+<!-- Card 4: Cloud Flashing -->
+<div class="relative group p-4 rounded-xl bg-slate-950/80 border border-slate-800/90 hover:border-blue-400 transition-all duration-300 backdrop-blur-md shadow-lg hover:shadow-[0_0_24px_rgba(59,130,246,0.35)] overflow-hidden cursor-pointer metric-card" onclick="pulseMetricCard(this)">
+<div class="absolute -right-6 -bottom-6 w-16 h-16 bg-blue-500/10 rounded-full blur-xl group-hover:bg-blue-500/25 transition-all"></div>
+<div class="flex items-center justify-between mb-1">
+<div class="text-[11px] font-mono text-blue-400 font-semibold tracking-wider flex items-center space-x-1.5">
+<span class="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
+<span>CLOUD FLASHING</span>
+</div>
+<span class="text-[10px] font-mono text-blue-300 bg-blue-950/80 px-1.5 py-0.5 rounded border border-blue-500/30">C++17</span>
+</div>
+<div class="text-xl font-bold font-display text-white mt-1 group-hover:text-blue-200 transition-colors metric-title">Blockly to C++</div>
+<div class="text-[11px] text-slate-400 mt-0.5 metric-desc">Live virtual MCU flashing</div>
+</div>
+</div>
+</div>
+</main>
+<!-- END: MainHeroSection -->
+<!-- BEGIN: Circuit Canvas Projects Showcase -->
+<section class="w-full py-20 px-4 sm:px-6 lg:px-8 border-t border-slate-800/80 bg-[#070b14]/85 glass-panel transition-colors duration-300" id="platformOverviewSection">
+<div class="max-w-7xl mx-auto">
+<!-- Section Header -->
+<div class="text-center max-w-3xl mx-auto mb-16">
+<div class="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full border border-cyan-500/30 bg-cyan-950/40 text-cyan-300 text-xs font-mono font-semibold tracking-wider mb-4 transition-all" id="sectionPill">
+<span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping"></span>
+<span>BROWSER-NATIVE HARDWARE SIMULATION</span>
+</div>
+<h2 class="font-display font-bold text-3xl sm:text-5xl text-white tracking-tight transition-colors" id="sectionHeading">
+  Next-Gen Cyber Virtual Labs
+</h2>
+<p class="mt-4 text-base sm:text-lg text-slate-300 leading-relaxed transition-colors" id="sectionSubhead">
+  Design, wire, and execute real-world engineering projects directly in Circuit Canvas with WebAssembly SPICE matrix solving, multi-sensor telemetry, and instruction-level firmware execution.
+</p>
+</div>
+<!-- Real-World Engineering Projects Grid inside Circuit Canvas -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Project 1: Smart IoT Weather & Environmental Station -->
+<div class="group p-6 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-cyan-400 transition-all duration-300 shadow-xl flex flex-col justify-between project-card">
+<div>
+<div class="overflow-hidden rounded-xl mb-5 border border-slate-800 relative h-48 bg-slate-950">
+<img alt="IoT Environmental Weather Station Circuit Canvas" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida/AEtjO1W-hSXRRc0rpx8ZOYDBJiBpN-CHwidbR2TyUUI15iKYoTqE42lSZPXkS_gV-s3SVJdICoV8BitakDMcYcRPlb2aVQtiOOvPgcaWcwreoDDMjkPesByZ1_KadI-vQ5dNsA4DZH6lHmYKNaRK8H4RrI5oCjl_RXMy5LzEZG2gx-Y1UWZP6NVNgaCZuMjOMsgyotGoiXxoYsS0NmNXgH5ZA89ayYtp9uWKEdRi-BsmDzHexJjefcZ2Ja_NrQ"/>
+<div class="absolute top-3 left-3 px-2 py-0.5 rounded text-[10px] font-mono font-semibold bg-cyan-950/90 text-cyan-300 border border-cyan-500/40 backdrop-blur-md">
+  I2C Bus • 3.3V / 5V Logic
+</div>
+<div class="absolute bottom-3 right-3 px-2 py-0.5 rounded text-[10px] font-mono bg-black/80 text-emerald-400 border border-emerald-500/30">
+  Active Telemetry
+</div>
+</div>
+<div class="flex items-center space-x-2 mb-2">
+<span class="w-2.5 h-2.5 rounded-full bg-cyan-400"></span>
+<h3 class="font-display font-bold text-lg text-white card-heading transition-colors">Smart IoT Weather &amp; Environmental Station</h3>
+</div>
+<p class="text-xs sm:text-sm text-slate-300 leading-relaxed mb-4 card-desc transition-colors">
+  Arduino Uno R3 wired to DHT22 temperature/humidity module, SSD1306 OLED, and CdS photoresistor. Real-time temperature ramp testing, lux sensitivity calculations, and dynamic I2C bus trace inspection.
+</p>
+<div class="p-3 bg-slate-950 rounded-xl border border-slate-800/80 mb-4 font-mono text-[11px] text-cyan-300/90 code-box-preview transition-colors">
+<span class="text-slate-500 block">// Sensor Loop &amp; OLED telemetry</span>
+float t = dht.readTemperature();<br/>
+oled.print("Temp: "); oled.print(t);
+</div>
+</div>
+<button class="w-full py-2.5 px-4 rounded-xl text-xs font-semibold font-mono tracking-wide text-cyan-300 bg-cyan-950/50 hover:bg-cyan-900/70 border border-cyan-500/40 flex items-center justify-center space-x-2 group-hover:border-cyan-400 transition-colors card-action-btn-circuit" onclick="openLoginModal()">
+<span>OPEN IN CIRCUIT CANVAS</span>
+<span>→</span>
+</button>
+</div>
+<!-- Project 2: Autonomous Obstacle-Avoiding Mobile Robot -->
+<div class="group p-6 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-blue-400 transition-all duration-300 shadow-xl flex flex-col justify-between project-card">
+<div>
+<div class="overflow-hidden rounded-xl mb-5 border border-slate-800 relative h-48 bg-slate-950">
+<img alt="Autonomous Mobile Robot Sonar Circuit" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida/AEtjO1Wf-ivKs6vscaXR-gbiNp_V_a75TxZkSBbYVICixuvOaZUEfjxnzpUl6oR8bIlpyp1XTLUAkxJdxe_Pg3vFGIwfobRNYw6l1HnmLS_w_XnEM8QBRZIR4p-hAW1N6HcseqFoZLKiv0Gqv27YhayghX2Jiy8H2iYYotCSsFTw3_VCSuKwxk7fbwwHtq6zQJD4FtgJrbl3yZrKCq-NIzkChmfF2eg4Zj7-AQbFGX1Gj26VCZsrQZwD9g-6Bbs"/>
+<div class="absolute top-3 left-3 px-2 py-0.5 rounded text-[10px] font-mono font-semibold bg-blue-950/90 text-blue-300 border border-blue-500/40 backdrop-blur-md">
+  H-Bridge L298N • Dual Sonar
+</div>
+<div class="absolute bottom-3 right-3 px-2 py-0.5 rounded text-[10px] font-mono bg-black/80 text-cyan-400 border border-cyan-500/30">
+  50Hz PWM
+</div>
+</div>
+<div class="flex items-center space-x-2 mb-2">
+<span class="w-2.5 h-2.5 rounded-full bg-blue-400"></span>
+<h3 class="font-display font-bold text-lg text-white card-heading transition-colors">Autonomous Obstacle-Avoiding Mobile Robot</h3>
+</div>
+<p class="text-xs sm:text-sm text-slate-300 leading-relaxed mb-4 card-desc transition-colors">
+  Dual HC-SR04 ultrasonic sonar transceivers wired with L298N dual H-bridge motor driver and SG90 pan servo. Simulates real-time 40kHz acoustic reflection and distance wave plots.
+</p>
+<div class="p-3 bg-slate-950 rounded-xl border border-slate-800/80 mb-4 font-mono text-[11px] text-blue-300/90 code-box-preview transition-colors">
+<span class="text-slate-500 block">// Echo distance calculation</span>
+long dur = pulseIn(ECHO_PIN, HIGH);<br/>
+int cm = (dur * 0.034) / 2;
+</div>
+</div>
+<button class="w-full py-2.5 px-4 rounded-xl text-xs font-semibold font-mono tracking-wide text-blue-300 bg-blue-950/50 hover:bg-blue-900/70 border border-blue-500/40 flex items-center justify-center space-x-2 group-hover:border-blue-400 transition-colors card-action-btn-circuit" onclick="openLoginModal()">
+<span>OPEN IN CIRCUIT CANVAS</span>
+<span>→</span>
+</button>
+</div>
+<!-- Project 3: Precision Industrial Closed-Loop Servo Controller -->
+<div class="group p-6 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-emerald-400 transition-all duration-300 shadow-xl flex flex-col justify-between project-card">
+<div>
+<div class="overflow-hidden rounded-xl mb-5 border border-slate-800 relative h-48 bg-slate-950">
+<img alt="Robotics Workcell Servo Controller" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida/AEtjO1WP_9H7Gbsykhg4wbNbpvCDYYWq61UbBHCZ1afKz_NqtCWM1jy1gO9cwSXdK_-l3oXYlhTRWb73shGzSMjmc9iD-RqMcixYKOdL8mYmVi_QdVlV7ZkLXODDQYNW0Gu8WcWDGzkbfnZqPzLS9ZDy1eTjJ9oPEDa7se9g8wGtuaCxRpiBO-uUuXiIGy_pLgAWeW_IpUJXRyso6EbRzdNn1qqVFqo13SeUNXfdGRhj_n3htmLnBqQJXV_HsSE"/>
+<div class="absolute top-3 left-3 px-2 py-0.5 rounded text-[10px] font-mono font-semibold bg-emerald-950/90 text-emerald-300 border border-emerald-500/40 backdrop-blur-md">
+  PID Feedback • 0ms Delay
+</div>
+<div class="absolute bottom-3 right-3 px-2 py-0.5 rounded text-[10px] font-mono bg-black/80 text-amber-400 border border-amber-500/30">
+  Virtual Scope Active
+</div>
+</div>
+<div class="flex items-center space-x-2 mb-2">
+<span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+<h3 class="font-display font-bold text-lg text-white card-heading transition-colors">Precision Closed-Loop Servo Controller</h3>
+</div>
+<p class="text-xs sm:text-sm text-slate-300 leading-relaxed mb-4 card-desc transition-colors">
+  PID positional loop with 10k precision potentiometer feedback, PWM modulation, and instantaneous oscilloscope signal monitoring. Validate overshoot, settling times, and jitter.
+</p>
+<div class="p-3 bg-slate-950 rounded-xl border border-slate-800/80 mb-4 font-mono text-[11px] text-emerald-300/90 code-box-preview transition-colors">
+<span class="text-slate-500 block">// PID error correction</span>
+float err = setpoint - actualPos;<br/>
+pwmOut = kp*err + ki*integral;
+</div>
+</div>
+<button class="w-full py-2.5 px-4 rounded-xl text-xs font-semibold font-mono tracking-wide text-emerald-300 bg-emerald-950/50 hover:bg-emerald-900/70 border border-emerald-500/40 flex items-center justify-center space-x-2 group-hover:border-emerald-400 transition-colors card-action-btn-circuit" onclick="openLoginModal()">
+<span>OPEN IN CIRCUIT CANVAS</span>
+<span>→</span>
+</button>
+</div>
+<!-- Project 4: Automated Security Perimeter Alarm -->
+<div class="p-6 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-indigo-400 transition-all duration-300 shadow-xl flex flex-col justify-between project-card">
+<div>
+<div class="h-48 rounded-xl bg-slate-950 border border-slate-800 p-4 font-mono text-[11px] text-cyan-300 flex flex-col justify-between mb-5 overflow-hidden relative">
+<div class="flex items-center justify-between border-b border-slate-800 pb-2">
+<span class="text-slate-400">Perimeter Intrusion Logic</span>
+<span class="px-2 py-0.5 bg-indigo-950 text-indigo-300 rounded text-[9px] border border-indigo-500/30">Ext Interrupt D2</span>
+</div>
+<div class="space-y-1 text-slate-300 text-[10px]">
+<span class="text-indigo-400 block">// Hardware Interrupt on Motion</span>
+<span class="text-emerald-400">void motionISR() {</span>
+<span class="text-cyan-300 pl-3">tone(BUZZER_PIN, 2400, 250);</span>
+<span class="text-cyan-300 pl-3">digitalWrite(ALERT_LED, HIGH);</span>
+<span class="text-emerald-400">}</span>
+</div>
+<div class="flex items-center justify-between text-[9px] text-emerald-400 pt-1 border-t border-slate-800/80">
+<span>PIR DOME: ARMED</span>
+<span class="text-cyan-400">Response: &lt;1.2µs</span>
+</div>
+</div>
+<div class="flex items-center space-x-2 mb-2">
+<span class="w-2.5 h-2.5 rounded-full bg-indigo-400"></span>
+<h3 class="font-display font-bold text-lg text-white card-heading transition-colors">Automated Security Perimeter Alarm</h3>
+</div>
+<p class="text-xs sm:text-sm text-slate-300 leading-relaxed mb-4 card-desc transition-colors">
+  HC-SR501 pyroelectric infrared motion sensor linked to hardware pin interrupt D2, piezo siren, and multi-state status LEDs. Learn edge-triggered hardware interrupts safely.
+</p>
+</div>
+<button class="w-full py-2.5 px-4 rounded-xl text-xs font-semibold font-mono tracking-wide text-indigo-300 bg-indigo-950/50 hover:bg-indigo-900/70 border border-indigo-500/40 flex items-center justify-center space-x-2 hover:border-indigo-400 transition-colors card-action-btn-circuit" onclick="openLoginModal()">
+<span>OPEN IN CIRCUIT CANVAS</span>
+<span>→</span>
+</button>
+</div>
+<!-- Project 5: Digital Signal Processing & Active Filter Lab -->
+<div class="p-6 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-amber-400 transition-all duration-300 shadow-xl flex flex-col justify-between lg:col-span-2 project-card">
+<div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-5">
+<div class="p-3 rounded-xl bg-slate-950 border border-slate-800 text-center code-box-preview">
+<span class="text-[10px] font-mono text-cyan-400 block mb-1">LM358 OP-AMP</span>
+<span class="text-xs font-bold text-white card-heading block">Active Bandpass</span>
+<span class="text-[9px] text-slate-400 card-desc">Cutoff: 1.2 kHz - 8 kHz</span>
+</div>
+<div class="p-3 rounded-xl bg-slate-950 border border-slate-800 text-center code-box-preview">
+<span class="text-[10px] font-mono text-amber-400 block mb-1">BODE ANALYZER</span>
+<span class="text-xs font-bold text-white card-heading block">AC Sweep</span>
+<span class="text-[9px] text-slate-400 card-desc">Gain + Phase Margin</span>
+</div>
+<div class="p-3 rounded-xl bg-slate-950 border border-slate-800 text-center code-box-preview">
+<span class="text-[10px] font-mono text-emerald-400 block mb-1">TOTAL HARMONIC</span>
+<span class="text-xs font-bold text-white card-heading block">&lt; 0.05% THD</span>
+<span class="text-[9px] text-slate-400 card-desc">Pure sinusoidal output</span>
+</div>
+<div class="p-3 rounded-xl bg-slate-950 border border-slate-800 text-center code-box-preview">
+<span class="text-[10px] font-mono text-blue-400 block mb-1">PROBE NODES</span>
+<span class="text-xs font-bold text-white card-heading block">Differential V</span>
+<span class="text-[9px] text-slate-400 card-desc">Multi-channel Scope</span>
+</div>
+</div>
+<div class="flex items-center space-x-2 mb-2">
+<span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
+<h3 class="font-display font-bold text-xl text-white card-heading transition-colors">Digital Signal Processing &amp; Active Filter Lab</h3>
+</div>
+<p class="text-xs sm:text-sm text-slate-300 leading-relaxed mb-4 card-desc transition-colors">
+  Precision operational amplifier active bandpass filter design. Run frequency-domain AC sweeps, inspect Bode magnitude/phase plots, and probe harmonic attenuation using Circuit Canvas's real-time WebAssembly SPICE engine.
+</p>
+</div>
+<div class="flex flex-col sm:flex-row items-center gap-3">
+<button class="w-full sm:w-auto flex-1 py-2.5 px-4 rounded-xl text-xs font-semibold font-mono tracking-wide text-amber-300 bg-amber-950/50 hover:bg-amber-900/70 border border-amber-500/40 flex items-center justify-center space-x-2 hover:border-amber-400 transition-colors card-action-btn-circuit" onclick="openLoginModal()">
+<span>OPEN IN CIRCUIT CANVAS</span>
+<span>→</span>
+</button>
+<button class="w-full sm:w-auto py-2.5 px-4 rounded-xl text-xs font-semibold font-mono tracking-wide text-cyan-300 bg-cyan-950/40 hover:bg-cyan-900/60 border border-cyan-500/30 flex items-center justify-center space-x-2 transition-colors card-action-btn-circuit" onclick="openModal('demoModal')">
+<span>RUN INTERACTIVE OSCILLOSCOPE</span>
+<span>⚡</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- END: Circuit Canvas Projects Showcase -->
+<!-- BEGIN: Footer -->
+<footer class="w-full bg-[#0a0e1a]/95 border-t border-slate-800/80 pt-16 pb-10 px-6 sm:px-10 lg:px-16 text-slate-400 text-sm mt-auto glass-panel transition-colors duration-300" id="mainFooter">
+<div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8 mb-12">
+<!-- Left Brand & Address Column -->
+<div class="lg:col-span-2 space-y-4">
+<div class="flex items-center">
+<img alt="KLS Studio Logo" class="h-10 w-auto object-contain mb-1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAaQ0_zBWQjapB3x-D2GHt180D-MdKmxPaJbVSO4YGxwUSeJCb7P-dU03Ug2H5KrSdR8ocIfTtimTjJ3qQNLCWAwjBDoQiMzX0HuAG3xSmCzJdOOxNQ3qUEfpLyRmYR9uz2AYhJ7fb5T3EUETHiZWQM2JUU6XSKIvRfLxpVzMfml7gJI5Q-VNgK3IOLtJkTll2jfghi-iJqy4ZqkzfSCgKSVv4JQKXOIaNVRcXmoDmZlDECb_Ie6ooAvfqmXlbsGKnZw"/>
+</div>
+<p class="text-xs tracking-wider uppercase font-semibold text-slate-300 transition-colors" id="footerBrandTitle">
+  KESHAVA ELITE PROJECTS (ROBOTICS &amp; TECHNOLOGY)
+</p>
+<div class="space-y-2.5 pt-2 text-xs sm:text-sm text-slate-400 transition-colors">
+<div class="flex items-start space-x-3">
+<svg class="w-5 h-5 text-emerald-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span id="footerAddressText">1st Floor, Cohort Co-Working, Mr Prime Building, BP Raju Marg, Kondapur, Hyderabad, Telangana - 500084.</span>
+</div>
+<div class="flex items-center space-x-3">
+<svg class="w-5 h-5 text-cyan-400 flex-shrink-0" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<a class="hover:text-cyan-300 transition-colors footer-link" href="mailto:info@keshavaeliteprojects.in">info@keshavaeliteprojects.in</a>
+</div>
+<div class="flex items-center space-x-3">
+<svg class="w-5 h-5 text-emerald-400 flex-shrink-0" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span>+91 7659867411</span>
+</div>
+</div>
+<!-- CONNECT WITH US: Social Icons -->
+<div class="pt-4">
+<span class="block text-xs font-semibold tracking-wider uppercase text-slate-400 mb-3">CONNECT WITH US</span>
+<div class="flex items-center space-x-3">
+<!-- YouTube -->
+<a class="w-9 h-9 rounded-full flex items-center justify-center bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white transition-all border border-red-500/20" href="#" title="YouTube">
+<svg class="w-4 h-4 fill-current" viewbox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path></svg>
+</a>
+<!-- LinkedIn -->
+<a class="w-9 h-9 rounded-full flex items-center justify-center bg-blue-500/10 text-blue-400 hover:bg-blue-600 hover:text-white transition-all border border-blue-500/20" href="#" title="LinkedIn">
+<svg class="w-4 h-4 fill-current" viewbox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path></svg>
+</a>
+<!-- Instagram -->
+<a class="w-9 h-9 rounded-full flex items-center justify-center bg-pink-500/10 text-pink-400 hover:bg-pink-600 hover:text-white transition-all border border-pink-500/20" href="#" title="Instagram">
+<svg class="w-4 h-4 fill-current" viewbox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path></svg>
+</a>
+<!-- Map Location Pin -->
+<a class="w-9 h-9 rounded-full flex items-center justify-center bg-emerald-500/10 text-emerald-400 hover:bg-emerald-600 hover:text-white transition-all border border-emerald-500/20" href="#" title="Locate Us">
+<svg class="w-4 h-4 fill-none stroke-currentColor" viewbox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</a>
+<!-- Telegram -->
+<a class="w-9 h-9 rounded-full flex items-center justify-center bg-cyan-500/10 text-cyan-400 hover:bg-cyan-600 hover:text-white transition-all border border-cyan-500/20" href="#" title="Telegram">
+<svg class="w-4 h-4 fill-currentColor" viewbox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"></path></svg>
+</a>
+</div>
+</div>
+</div>
+<!-- Column 1: KLS PLATFORM -->
+<div class="space-y-3 footer-links-col">
+<h3 class="font-display font-bold text-xs uppercase tracking-wider text-slate-200 footer-col-title transition-colors">KLS PLATFORM</h3>
+<ul class="space-y-2 text-xs sm:text-sm">
+<li><a class="hover:text-cyan-400 transition-colors footer-link" href="javascript:void(0)" onclick="openPlatformDeepDive('circuit')">Circuit Studio (SPICE)</a></li>
+<li><a class="hover:text-cyan-400 transition-colors footer-link" href="javascript:void(0)" onclick="openPlatformDeepDive('robotics')">Robotics Studio 3D</a></li>
+<li><a class="hover:text-cyan-400 transition-colors footer-link" href="javascript:void(0)" onclick="openPlatformDeepDive('codeblocks')">Embedded Studio (C++)</a></li>
+<li><a class="hover:text-cyan-400 transition-colors footer-link" href="javascript:void(0)" onclick="openPlatformDeepDive('industrial')">IoT Telemetry Hub</a></li>
+<li><a class="hover:text-cyan-400 transition-colors footer-link" href="javascript:void(0)" onclick="openLoginModal()">Physics Engine</a></li>
+<li><a class="hover:text-cyan-400 transition-colors footer-link" href="javascript:void(0)" onclick="openLoginModal()">AI Lab Mentor</a></li>
+</ul>
+</div>
+<!-- Column 2: SOLUTIONS -->
+<div class="space-y-3 footer-links-col">
+<h3 class="font-display font-bold text-xs uppercase tracking-wider text-slate-200 footer-col-title transition-colors">SOLUTIONS</h3>
+<ul class="space-y-2 text-xs sm:text-sm">
+<li><a class="hover:text-cyan-400 transition-colors footer-link" href="#">Engineering Colleges</a></li>
+<li><a class="hover:text-cyan-400 transition-colors footer-link" href="#">Universities &amp; Deans</a></li>
+<li><a class="hover:text-cyan-400 transition-colors footer-link" href="#">Schools &amp; STEM Centers</a></li>
+<li><a class="hover:text-cyan-400 transition-colors footer-link" href="#">R&amp;D Labs &amp; Startups</a></li>
+<li><a class="hover:text-cyan-400 transition-colors footer-link" href="#">For Students</a></li>
+<li><a class="hover:text-cyan-400 transition-colors footer-link" href="#">Institutional Pricing</a></li>
+</ul>
+</div>
+<!-- Column 3: RESOURCES & ABOUT -->
+<div class="space-y-3 footer-links-col">
+<h3 class="font-display font-bold text-xs uppercase tracking-wider text-slate-200 footer-col-title transition-colors">RESOURCES &amp; ABOUT</h3>
+<ul class="space-y-2 text-xs sm:text-sm">
+<li><a class="hover:text-cyan-400 transition-colors footer-link" href="#">Lab Manuals &amp; Docs</a></li>
+<li><a class="hover:text-cyan-400 transition-colors font-medium text-slate-200 footer-col-title transition-colors" href="#">About KLS Studio</a></li>
+<li><a class="hover:text-cyan-400 transition-colors font-medium text-slate-200 footer-col-title transition-colors" href="#">Contact &amp; Support</a></li>
+<li><a class="hover:text-cyan-400 transition-colors footer-link" href="#">Student Projects</a></li>
+<li><a class="hover:text-cyan-400 transition-colors footer-link" href="#">Engineering Blog</a></li>
+<li><a class="hover:text-cyan-400 transition-colors footer-link" href="#">Help Center &amp; FAQs</a></li>
+</ul>
+</div>
+</div>
+<!-- Bottom Bar -->
+<div class="max-w-7xl mx-auto pt-6 border-t border-slate-800/80 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-400 transition-colors" id="footerBottomBar">
+<p>© 2026 Keshava Elite Projects • KLS Studio. Build. Simulate. Learn. Innovate.</p>
+<div class="flex items-center space-x-6">
+<a class="hover:text-cyan-300 transition-colors footer-link" href="#">Privacy Policy</a>
+<a class="hover:text-cyan-300 transition-colors footer-link" href="#">Terms of Service</a>
+<a class="hover:text-cyan-300 transition-colors footer-link" href="#">Accreditation Support</a>
+</div>
+</div>
+</footer>
+<!-- END: Footer -->
+</div>
+<!-- BEGIN: ModalsSection -->
+<!-- 1. KLS STUDIO LOGIN / PLATFORM LAUNCH MODAL -->
+<div class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 hidden" data-purpose="login-modal" id="loginModal">
+<div class="bg-[#0b1329] border border-cyan-500/50 rounded-2xl max-w-md w-full p-6 sm:p-8 shadow-[0_0_60px_rgba(0,240,255,0.3)] relative transform transition-all text-left">
+<!-- Close button -->
+<button aria-label="Close login modal" class="absolute top-4 right-4 text-slate-400 hover:text-white p-2 rounded-lg hover:bg-slate-800/60 transition-colors" onclick="closeModal('loginModal')">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+<div class="flex items-center space-x-3 mb-4">
+<img alt="KLS Logo" class="h-9 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD6BemeIe4ZHs1rKR3t1rLjqULCarhRLHhuuyDY_tRheQVKuwqgi3-uDpoeX-I87V9uZD-rmxbL5GPkd0-k5vbGcJqrUnbd01gT6CDk8fo8VQ2RY3f3VP6lCi02swuv37XCVfJnsmCwZEJTY6B1vo59xWv4VfcoUbfWGtAs1F81j5qePgXd0G2T-qfN0W-aWry8l4ecRNSXiRUWbNk77k30JLjF7ZGnxWN6q4SgnN8ffAumzKwgNFUCs7XQqffi3YoxeA"/>
+<div class="px-2.5 py-0.5 rounded bg-cyan-950/80 border border-cyan-500/30 text-cyan-300 text-[10px] font-mono font-semibold">
+  ONLINE SUITE v2.4
+</div>
+</div>
+<h3 class="font-display text-2xl font-bold text-white mb-1 modal-heading">Launch KLS Virtual Lab</h3>
+<p class="text-slate-400 text-xs leading-relaxed mb-6 modal-subtext">
+  Sign in to access your saved circuits, code routines, and interactive cloud simulation workbenches.
+</p>
+<!-- Login Form -->
+<form class="space-y-4" onsubmit="event.preventDefault(); window.location.href='https://kls.keshavaeliteprojects.co.in/';">
+<div>
+<label class="block text-xs font-mono text-slate-300 mb-1.5 modal-subtext">KLS User ID / Institutional Email</label>
+<div class="relative">
+<input class="w-full bg-slate-950 border border-slate-700/90 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all font-mono" placeholder="engineer@college.edu" required="" type="email"/>
+</div>
+</div>
+<div>
+<div class="flex justify-between items-center mb-1.5">
+<label class="block text-xs font-mono text-slate-300 modal-subtext">Access Password</label>
+<a class="text-[11px] text-cyan-400 hover:underline" href="#">Forgot?</a>
+</div>
+<input class="w-full bg-slate-950 border border-slate-700/90 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all font-mono" placeholder="••••••••••••" required="" type="password"/>
+</div>
+<div class="pt-2 space-y-3">
+<button class="w-full py-3 px-4 bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-display font-bold text-sm rounded-xl shadow-[0_0_20px_rgba(0,240,255,0.4)] transition-all flex items-center justify-center space-x-2" type="submit">
+<span>SIGN IN TO KLS STUDIO</span>
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path></svg>
+</button>
+<div class="flex items-center my-3">
+<div class="flex-grow border-t border-slate-800"></div>
+<span class="px-3 text-[11px] text-slate-500 uppercase font-mono">or institutional sso</span>
+<div class="flex-grow border-t border-slate-800"></div>
+</div>
+<button class="w-full py-2.5 px-4 bg-slate-900 hover:bg-slate-800 border border-slate-700 rounded-xl text-slate-200 text-xs font-semibold flex items-center justify-center space-x-2.5 transition-colors" onclick="window.location.href='https://kls.keshavaeliteprojects.co.in/';" type="button">
+<svg class="w-4 h-4" viewbox="0 0 24 24">
+<path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path>
+<path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path>
+<path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" fill="#FBBC05"></path>
+<path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" fill="#EA4335"></path>
+</svg>
+<span>Sign in with Google Workspace</span>
+</button>
+</div>
+</form>
+<div class="mt-4 pt-3 border-t border-slate-800/80 text-center">
+<a class="text-xs text-cyan-400 hover:underline font-mono" href="https://kls.keshavaeliteprojects.co.in/" target="_blank">
+  Direct Portal: kls.keshavaeliteprojects.co.in ↗
+</a>
+</div>
+</div>
+</div>
+<!-- 2. EXPLORE PLATFORM MODAL: 4-STUDIO CARDS VIEW -->
+<div class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-md flex items-center justify-center p-4 sm:p-6" data-purpose="explore-modal" id="exploreModal">
+<div class="bg-[#0b1328] border border-cyan-500/40 rounded-3xl max-w-4xl w-full p-6 sm:p-8 shadow-[0_0_60px_rgba(0,240,255,0.25)] relative text-left">
+<button aria-label="Close Explore Platform modal" class="absolute top-6 right-6 text-slate-400 hover:text-white p-2 rounded-full hover:bg-slate-800 transition-colors" onclick="closeModal('exploreModal')">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path></svg>
+</button>
+<div class="pb-3 mb-6">
+<h2 class="font-display text-2xl sm:text-3xl font-bold text-white tracking-tight modal-heading">Explore the KLS Platform</h2>
+<p class="text-sm text-slate-400 mt-1 modal-subtext">Four studios, one workspace. Pick one to see what it does.</p>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-3.5 sm:gap-5 py-2">
+<!-- Card 1: Circuit Canvas -->
+<button class="studio-card group p-5 rounded-2xl border text-center transition-all duration-200 flex flex-col items-center bg-slate-900/90 border-slate-800/90 hover:border-cyan-400 hover:bg-slate-800/90 hover:shadow-[0_0_25px_rgba(0,240,255,0.3)] cursor-pointer" onclick="openPlatformDeepDive('circuit')">
+<div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white mb-4 shadow-md group-hover:scale-110 transition-transform">
+<svg class="w-8 h-8" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<h3 class="font-display font-bold text-base text-white group-hover:text-cyan-300 transition-colors">Circuit Canvas</h3>
+<p class="text-xs text-slate-400 mt-0.5 modal-subtext">Wire &amp; simulate</p>
+</button>
+<!-- Card 2: Code Blocks -->
+<button class="studio-card group p-5 rounded-2xl border text-center transition-all duration-200 flex flex-col items-center bg-slate-900/90 border-slate-800/90 hover:border-indigo-400 hover:bg-slate-800/90 hover:shadow-[0_0_25px_rgba(99,102,241,0.3)] cursor-pointer" onclick="openPlatformDeepDive('codeblocks')">
+<div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white mb-4 shadow-md group-hover:scale-110 transition-transform">
+<svg class="w-8 h-8" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<h3 class="font-display font-bold text-base text-white group-hover:text-indigo-300 transition-colors">Code Blocks</h3>
+<p class="text-xs text-slate-400 mt-0.5 modal-subtext">Visual logic</p>
+</button>
+<!-- Card 3: Robotics -->
+<button class="studio-card group p-5 rounded-2xl border text-center transition-all duration-200 flex flex-col items-center bg-slate-900/90 border-slate-800/90 hover:border-teal-400 hover:bg-slate-800/90 hover:shadow-[0_0_25px_rgba(20,184,166,0.3)] cursor-pointer" onclick="openPlatformDeepDive('robotics')">
+<div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan-600 to-teal-500 flex items-center justify-center text-white mb-4 shadow-md group-hover:scale-110 transition-transform">
+<svg class="w-8 h-8" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M9 3v2m6-2v2M4 9h16v11a2 2 0 01-2 2H6a2 2 0 01-2-2V9zm5 5h.01M15 14h.01M9 18h6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<h3 class="font-display font-bold text-base text-white group-hover:text-teal-300 transition-colors">Robotics</h3>
+<p class="text-xs text-slate-400 mt-0.5 modal-subtext">Boards &amp; sensors</p>
+</button>
+<!-- Card 4: Industrial Robots -->
+<button class="studio-card group p-5 rounded-2xl border text-center transition-all duration-200 flex flex-col items-center bg-slate-900/90 border-slate-800/90 hover:border-purple-400 hover:bg-slate-800/90 hover:shadow-[0_0_25px_rgba(168,85,247,0.3)] cursor-pointer" onclick="openPlatformDeepDive('industrial')">
+<div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-indigo-600 to-purple-600 flex items-center justify-center text-white mb-4 shadow-md group-hover:scale-110 transition-transform">
+<svg class="w-8 h-8" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<h3 class="font-display font-bold text-base text-white group-hover:text-purple-300 transition-colors">Industrial Robots</h3>
+<p class="text-xs text-slate-400 mt-0.5 modal-subtext">Coming soon</p>
+</button>
+</div>
+</div>
+</div>
+<!-- 3. COMPREHENSIVE WORKSPACE DEEP-DIVE MODAL -->
+<div class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-6 overflow-y-auto" data-purpose="deep-dive-modal" id="deepDiveModal">
+<div class="bg-[#0b1328] border border-cyan-500/40 rounded-3xl max-w-5xl w-full p-6 sm:p-8 shadow-2xl relative my-auto max-h-[92vh] flex flex-col text-left">
+<div class="flex items-center justify-between pb-4 border-b border-slate-800">
+<button class="inline-flex items-center space-x-2 text-xs font-mono text-cyan-400 hover:text-cyan-300 font-semibold px-3 py-1.5 rounded-lg bg-cyan-950/40 border border-cyan-500/30" onclick="closeModal('deepDiveModal'); openExploreModal();">
+<span>← Back to 4 Studios</span>
+</button>
+<button aria-label="Close deep dive" class="text-slate-400 hover:text-white p-2 rounded-full hover:bg-slate-800" onclick="closeModal('deepDiveModal')">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path></svg>
+</button>
+</div>
+<div class="overflow-y-auto pr-2 space-y-6 flex-grow pt-6" id="deepDiveContent">
+<!-- Injected dynamically via openPlatformDeepDive() -->
+</div>
+</div>
+</div>
+<!-- 4. INTERACTIVE LIVE DEMO / OSCILLOSCOPE MODAL -->
+<div class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-6" data-purpose="interactive-demo-modal" id="demoModal">
+<div class="bg-[#0b1328] border border-cyan-500/50 rounded-2xl max-w-3xl w-full p-6 sm:p-8 shadow-[0_0_50px_rgba(0,240,255,0.3)] relative text-left">
+<div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-5">
+<div class="flex items-center space-x-3">
+<span class="w-3 h-3 rounded-full bg-emerald-400 animate-ping"></span>
+<h3 class="font-display text-xl font-bold text-white modal-heading">Live Virtual Circuit Signal Monitor</h3>
+</div>
+<button aria-label="Close demo modal" class="text-slate-400 hover:text-white p-1" onclick="closeModal('demoModal')">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+</div>
+<div class="bg-black/90 rounded-xl p-3 border border-cyan-500/30 mb-5 relative">
+<div class="absolute top-4 right-4 flex items-center space-x-4 text-[11px] font-mono">
+<span class="text-emerald-400 font-bold" id="liveFrequency">Freq: 60 Hz</span>
+<span class="text-cyan-400 font-bold" id="liveVoltage">Vpp: 5.00 V</span>
+</div>
+<canvas class="w-full h-48 rounded bg-[#030712]" height="240" id="scopeCanvas" width="680"></canvas>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
+<div class="p-3 bg-slate-900 rounded-lg border border-slate-800 project-card">
+<label class="block text-slate-400 mb-1 modal-subtext">Signal Type</label>
+<select class="w-full bg-slate-950 border border-slate-700 text-white rounded p-1.5 focus:border-cyan-400" id="signalType">
+<option value="sine">Sine Wave (AC Analog)</option>
+<option value="square">Square Wave (PWM 50%)</option>
+<option value="noise">Sensor Noise (ADC Trace)</option>
+</select>
+</div>
+<div class="p-3 bg-slate-900 rounded-lg border border-slate-800 project-card">
+<label class="block text-slate-400 mb-1 modal-subtext">Frequency (Hz)</label>
+<input class="w-full accent-cyan-400" id="freqSlider" max="150" min="10" type="range" value="60"/>
+</div>
+<div class="p-3 bg-slate-900 rounded-lg border border-slate-800 project-card">
+<label class="block text-slate-400 mb-1 modal-subtext">Amplitude (V)</label>
+<input class="w-full accent-cyan-400" id="ampSlider" max="10" min="1" type="range" value="5"/>
+</div>
+</div>
+<div class="mt-5 text-right">
+<button class="px-5 py-2 rounded-lg bg-cyan-500 text-slate-950 font-bold hover:bg-cyan-400 transition-all text-xs" onclick="closeModal('demoModal')">
+  Close Sandbox
+</button>
+</div>
+</div>
+</div>
+<!-- END: ModalsSection -->
+<!-- JavaScript Concern 1: Reliable Day/Light Mode Switcher & Modal Handlers -->
+<script data-purpose="theme-and-modals">
+  // Target theme toggle button by its explicit id
+  const themeToggleBtn = document.getElementById('theme-toggle-btn');
+  const htmlElem = document.documentElement;
+  const sunIcon = document.getElementById('sunIcon');
+  const moonIcon = document.getElementById('moonIcon');
+
+  function applyTheme(isDark) {
+    if (isDark) {
+      // Switch into Dark Mode
+      htmlElem.classList.add('dark');
+      htmlElem.classList.remove('light-mode');
+      
+      if (sunIcon) sunIcon.classList.remove('hidden');
+      if (moonIcon) moonIcon.classList.add('hidden');
+    } else {
+      // Switch into Full Day / Light Mode
+      htmlElem.classList.remove('dark');
+      htmlElem.classList.add('light-mode');
+
+      if (sunIcon) sunIcon.classList.add('hidden');
+      if (moonIcon) moonIcon.classList.remove('hidden');
+    }
+  }
+
+  // Toggle on click
+  if (themeToggleBtn) {
+    themeToggleBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      const isCurrentlyDark = htmlElem.classList.contains('dark') && !htmlElem.classList.contains('light-mode');
+      applyTheme(!isCurrentlyDark);
+    });
+  }
+
+  // Initial Dark Mode Setup
+  applyTheme(true);
+
+  // Modal Control Logic
+  function openModal(id) {
+    const modal = document.getElementById(id);
+    if (modal) {
+      modal.classList.remove('hidden');
+      if (id === 'demoModal') {
+        startScopeAnimation();
+      }
+    }
+  }
+
+  function closeModal(id) {
+    const modal = document.getElementById(id);
+    if (modal) {
+      modal.classList.add('hidden');
+      if (id === 'demoModal') {
+        stopScopeAnimation();
+      }
+    }
+  }
+
+  function openLoginModal() {
+    closeModal('exploreModal');
+    closeModal('deepDiveModal');
+    openModal('loginModal');
+  }
+
+  function openExploreModal() {
+    closeModal('deepDiveModal');
+    openModal('exploreModal');
+  }
+
+  // Interactive pulse on HUD Metric cards
+  function pulseMetricCard(cardElement) {
+    cardElement.classList.add('scale-105', 'ring-2', 'ring-cyan-400');
+    setTimeout(() => {
+      cardElement.classList.remove('scale-105', 'ring-2', 'ring-cyan-400');
+    }, 300);
+  }
+
+  // Studio Deep Dive Details Data
+  const studioDeepDives = {
+    circuit: {
+      title: "Circuit Canvas Workspace",
+      tag: "SPICE ELECTRONIC SCHEMATIC EDITOR",
+      img: "https://lh3.googleusercontent.com/aida/AEtjO1W-hSXRRc0rpx8ZOYDBJiBpN-CHwidbR2TyUUI15iKYoTqE42lSZPXkS_gV-s3SVJdICoV8BitakDMcYcRPlb2aVQtiOOvPgcaWcwreoDDMjkPesByZ1_KadI-vQ5dNsA4DZH6lHmYKNaRK8H4RrI5oCjl_RXMy5LzEZG2gx-Y1UWZP6NVNgaCZuMjOMsgyotGoiXxoYsS0NmNXgH5ZA89ayYtp9uWKEdRi-BsmDzHexJjefcZ2Ja_NrQ",
+      imgAlt: "Circuit Canvas Electronic Simulation Laboratory",
+      what: "A high-performance in-browser SPICE schematic editor with real-time analog/digital matrix solving, multi-node current probing, and transient response graphs.",
+      whyUse: "Eliminates physical breadboard wiring faults, protects expensive microchips from reverse polarity damages, and speeds up circuit validation by 10x.",
+      whyProvide: "Empowers every student and innovator with lab-grade oscilloscopes and circuit testbenches directly on mobile or laptop with zero install overhead.",
+      extra: "Features 500+ active semiconductors, ICs, op-amps, and passive elements ready for live nodal analysis."
+    },
+    codeblocks: {
+      title: "Code Blocks Studio",
+      tag: "VISUAL FIRMWARE COMPILER (C++17)",
+      img: "https://lh3.googleusercontent.com/aida/AEtjO1Wf-ivKs6vscaXR-gbiNp_V_a75TxZkSBbYVICixuvOaZUEfjxnzpUl6oR8bIlpyp1XTLUAkxJdxe_Pg3vFGIwfobRNYw6l1HnmLS_w_XnEM8QBRZIR4p-hAW1N6HcseqFoZLKiv0Gqv27YhayghX2Jiy8H2iYYotCSsFTw3_VCSuKwxk7fbwwHtq6zQJD4FtgJrbl3yZrKCq-NIzkChmfF2eg4Zj7-AQbFGX1Gj26VCZsrQZwD9g-6Bbs",
+      imgAlt: "Visual Code Blocks Transpiler Workbench",
+      what: "A dual-pane visual programming environment bridging graphical Scratch-like logic directly to compiled native C++/Python firmware.",
+      whyUse: "Allows students without prior syntax knowledge to grasp algorithms, interrupt routines, and pulse-width modulation intuitively.",
+      whyProvide: "To democratize embedded engineering education for schools and tier-2/tier-3 colleges without high licensing fees.",
+      extra: "Transpiles directly to production-ready C++ with 0 syntax overhead and live virtual microcontroller execution."
+    },
+    robotics: {
+      title: "Robotics & Hardware Twin",
+      tag: "MICROCONTROLLER & SENSOR EMULATION LAB",
+      img: "https://lh3.googleusercontent.com/aida/AEtjO1Wf-ivKs6vscaXR-gbiNp_V_a75TxZkSBbYVICixuvOaZUEfjxnzpUl6oR8bIlpyp1XTLUAkxJdxe_Pg3vFGIwfobRNYw6l1HnmLS_w_XnEM8QBRZIR4p-hAW1N6HcseqFoZLKiv0Gqv27YhayghX2Jiy8H2iYYotCSsFTw3_VCSuKwxk7fbwwHtq6zQJD4FtgJrbl3yZrKCq-NIzkChmfF2eg4Zj7-AQbFGX1Gj26VCZsrQZwD9g-6Bbs",
+      imgAlt: "Arduino and micro:bit Hardware Mat",
+      what: "Instruction-accurate virtual MCU runtime for Arduino Uno R3 and BBC micro:bit v2 with full register twins, peripheral timers, and sensors.",
+      whyUse: "Test complex multi-sensor mechatronics, sonars, PIR domes, and servo arrays without waiting for hardware deliveries.",
+      whyProvide: "Enables hands-on robotics mastery and debugging without risk of chip overheating or physical shorts.",
+      extra: "Includes full register HUDs, memory maps, and mechanical 180° servo angle visualizations."
+    },
+    industrial: {
+      title: "Industrial Automation & Workcells",
+      tag: "6-AXIS ARTICULATED DIGITAL TWIN",
+      img: "https://lh3.googleusercontent.com/aida/AEtjO1WP_9H7Gbsykhg4wbNbpvCDYYWq61UbBHCZ1afKz_NqtCWM1jy1gO9cwSXdK_-l3oXYlhTRWb73shGzSMjmc9iD-RqMcixYKOdL8mYmVi_QdVlV7ZkLXODDQYNW0Gu8WcWDGzkbfnZqPzLS9ZDy1eTjJ9oPEDa7se9g8wGtuaCxRpiBO-uUuXiIGy_pLgAWeW_IpUJXRyso6EbRzdNn1qqVFqo13SeUNXfdGRhj_n3htmLnBqQJXV_HsSE",
+      imgAlt: "Industrial Robotics Holographic Laboratory",
+      what: "6-Axis articulated industrial robotic workcell simulations with real-time inverse kinematics and trajectory generation.",
+      whyUse: "Safely teach industrial automation, pick-and-place routines, and factory robotics without multi-million dollar equipment overhead.",
+      whyProvide: "Prepares engineering graduates for Industry 4.0 production floors and smart manufacturing careers.",
+      extra: "Features holographic circuit telemetry, automated safety interlocks, and high-speed motion profile plotting."
+    }
+  };
+
+  function openPlatformDeepDive(studioKey) {
+    const data = studioDeepDives[studioKey];
+    if (!data) return;
+
+    const container = document.getElementById('deepDiveContent');
+    container.innerHTML = `
+      <div class="relative rounded-2xl overflow-hidden border border-cyan-500/40 h-64 bg-slate-950">
+        <img alt="${data.imgAlt}" class="w-full h-full object-cover object-center filter brightness-105" src="${data.img}"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-transparent flex flex-col justify-end p-6">
+          <span class="text-xs font-mono text-cyan-300 font-semibold tracking-wider">${data.tag}</span>
+          <h4 class="text-2xl font-bold font-display text-white mt-0.5">${data.title}</h4>
+          <p class="text-xs text-slate-300 max-w-2xl mt-1">${data.extra}</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="p-5 rounded-2xl bg-slate-900/90 border border-slate-800 project-card">
+          <h5 class="font-display font-bold text-cyan-400 mb-2 text-sm uppercase tracking-wider">What is it?</h5>
+          <p class="text-xs text-slate-300 card-desc leading-relaxed">${data.what}</p>
+        </div>
+        <div class="p-5 rounded-2xl bg-slate-900/90 border border-slate-800 project-card">
+          <h5 class="font-display font-bold text-blue-400 mb-2 text-sm uppercase tracking-wider">Why do we use it?</h5>
+          <p class="text-xs text-slate-300 card-desc leading-relaxed">${data.whyUse}</p>
+        </div>
+        <div class="p-5 rounded-2xl bg-slate-900/90 border border-slate-800 project-card">
+          <h5 class="font-display font-bold text-emerald-400 mb-2 text-sm uppercase tracking-wider">Why are we providing it?</h5>
+          <p class="text-xs text-slate-300 card-desc leading-relaxed">${data.whyProvide}</p>
+        </div>
+      </div>
+
+      <div class="p-5 rounded-2xl bg-slate-950 border border-cyan-500/30 flex flex-col sm:flex-row items-center justify-between gap-4 code-box-preview">
+        <div>
+          <span class="text-xs font-mono text-cyan-400">Ready to simulate in your browser?</span>
+          <h6 class="text-base font-bold text-white card-heading">Access ${data.title} instantly with zero installation.</h6>
+        </div>
+        <button class="px-6 py-3 bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-bold text-xs rounded-xl shadow-[0_0_20px_rgba(0,240,255,0.4)] transition-all whitespace-nowrap" onclick="openLoginModal()">
+          LAUNCH IN KLS STUDIO →
+        </button>
+      </div>
+    `;
+
+    closeModal('exploreModal');
+    openModal('deepDiveModal');
+  }
+</script>
+<!-- JavaScript Concern 2: Clearly Visible Vibrant Particle Matrix & Cyber Traces Animation -->
+<script data-purpose="canvas-particle-animation">
+  const canvas = document.getElementById('particleCanvas');
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+  let animationFrameId;
+
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resizeCanvas);
+  resizeCanvas();
+
+  class Particle {
+    constructor() {
+      this.reset();
+    }
+    reset() {
+      this.x = Math.random() * canvas.width;
+      this.y = Math.random() * canvas.height;
+      this.vx = (Math.random() - 0.5) * 1.3;
+      this.vy = (Math.random() - 0.5) * 1.3;
+      this.radius = Math.random() * 3.5 + 1.8;
+      this.pulseSpeed = 0.025 + Math.random() * 0.035;
+      this.pulseVal = Math.random();
+      this.isCircuitNode = Math.random() > 0.65;
+    }
+    update() {
+      this.x += this.vx;
+      this.y += this.vy;
+      this.pulseVal += this.pulseSpeed;
+
+      if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
+        this.reset();
+      }
+    }
+    draw() {
+      const currentAlpha = Math.abs(Math.sin(this.pulseVal)) * 0.55 + 0.45;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+
+      if (this.isCircuitNode) {
+        ctx.fillStyle = `rgba(0, 240, 255, ${currentAlpha})`;
+        ctx.shadowColor = '#00F0FF';
+        ctx.shadowBlur = 14;
+      } else {
+        ctx.fillStyle = `rgba(56, 189, 248, ${currentAlpha * 0.85})`;
+        ctx.shadowColor = '#2563EB';
+        ctx.shadowBlur = 8;
+      }
+      ctx.fill();
+      ctx.shadowBlur = 0;
+    }
+  }
+
+  for (let i = 0; i < 70; i++) {
+    particles.push(new Particle());
+  }
+
+  function renderParticles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 165) {
+          const strength = 1 - dist / 165;
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = `rgba(0, 240, 255, ${0.48 * strength})`;
+          ctx.lineWidth = strength * 2.5;
+          ctx.stroke();
+        }
+      }
+    }
+
+    particles.forEach(p => {
+      p.update();
+      p.draw();
+    });
+
+    animationFrameId = requestAnimationFrame(renderParticles);
+  }
+  renderParticles();
+</script>
+<!-- JavaScript Concern 3: Live Oscilloscope Sandbox Animation -->
+<script data-purpose="oscilloscope-demo">
+  const scopeCanvas = document.getElementById('scopeCanvas');
+  const sCtx = scopeCanvas ? scopeCanvas.getContext('2d') : null;
+  let scopeRunning = false;
+  let scopeTime = 0;
+  let scopeFrameId;
+
+  const signalTypeSelect = document.getElementById('signalType');
+  const freqSlider = document.getElementById('freqSlider');
+  const ampSlider = document.getElementById('ampSlider');
+  const liveFreqText = document.getElementById('liveFrequency');
+  const liveVoltText = document.getElementById('liveVoltage');
+
+  function drawOscilloscope() {
+    if (!sCtx) return;
+    const width = scopeCanvas.width;
+    const height = scopeCanvas.height;
+    const midY = height / 2;
+
+    sCtx.fillStyle = '#030712';
+    sCtx.fillRect(0, 0, width, height);
+
+    sCtx.strokeStyle = 'rgba(0, 240, 255, 0.15)';
+    sCtx.lineWidth = 1;
+    const gridSize = 24;
+    for (let x = 0; x < width; x += gridSize) {
+      sCtx.beginPath();
+      sCtx.moveTo(x, 0);
+      sCtx.lineTo(x, height);
+      sCtx.stroke();
+    }
+    for (let y = 0; y < height; y += gridSize) {
+      sCtx.beginPath();
+      sCtx.moveTo(0, y);
+      sCtx.lineTo(width, y);
+      sCtx.stroke();
+    }
+
+    const freq = parseFloat(freqSlider.value) || 60;
+    const amp = (parseFloat(ampSlider.value) || 5) * 8;
+    const sigType = signalTypeSelect.value;
+
+    liveFreqText.innerText = `Freq: ${freq} Hz`;
+    liveVoltText.innerText = `Vpp: ${(amp / 8).toFixed(2)} V`;
+
+    sCtx.beginPath();
+    sCtx.strokeStyle = '#00F0FF';
+    sCtx.lineWidth = 2.8;
+    sCtx.shadowBlur = 12;
+    sCtx.shadowColor = '#00F0FF';
+
+    for (let x = 0; x < width; x++) {
+      const t = (x * 0.008) + scopeTime;
+      let y = midY;
+
+      if (sigType === 'sine') {
+        y = midY + Math.sin(t * (freq * 0.1)) * amp;
+      } else if (sigType === 'square') {
+        y = midY + (Math.sin(t * (freq * 0.1)) >= 0 ? amp : -amp);
+      } else if (sigType === 'noise') {
+        y = midY + (Math.sin(t * 5) * (amp * 0.6)) + ((Math.random() - 0.5) * (amp * 0.7));
+      }
+
+      if (x === 0) sCtx.moveTo(x, y);
+      else sCtx.lineTo(x, y);
+    }
+    sCtx.stroke();
+    sCtx.shadowBlur = 0;
+
+    scopeTime += 0.05;
+    if (scopeRunning) {
+      scopeFrameId = requestAnimationFrame(drawOscilloscope);
+    }
+  }
+
+  function startScopeAnimation() {
+    if (!scopeRunning) {
+      scopeRunning = true;
+      drawOscilloscope();
+    }
+  }
+
+  function stopScopeAnimation() {
+    scopeRunning = false;
+    if (scopeFrameId) cancelAnimationFrame(scopeFrameId);
+  }
+</script>
+</body></html>
